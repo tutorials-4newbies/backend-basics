@@ -8,9 +8,8 @@ app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 @app.route('/')
 def index():
-    if 'username' in session:
-        return render_template("index_logged_in.html", username=session['username'])
-    return render_template("index_logged_out.html")
+    username = session.get('username', None)
+    return render_template("index.html", username=username)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
