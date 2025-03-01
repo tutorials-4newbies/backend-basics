@@ -21,3 +21,15 @@ def query():
     for key, value in request.args.items():
         message += f"\n{escape(key)}: {escape(value)}"
     return message
+
+@app.route("/form", methods=["POST", "GET"])
+def form():
+    if request.method == "POST":
+        return f"You sent the username - {request.form['username']}"
+    elif request.method == "GET":
+        return '''
+        <form method="post">
+            <p><input type=text name=username>
+            <p><input type=submit value=Login>
+        </form>
+    '''
