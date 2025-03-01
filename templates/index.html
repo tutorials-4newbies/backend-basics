@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>My First Server!</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block content %}
 {% if username %}
     <h1>Logged in as {{ username }}</h1>
     <h4>Click <a href="/logout">here</a> to logout</h4>
@@ -12,5 +7,4 @@
     <h1>You are not logged in</h1>
     <h4>Click <a href="/login">here</a> for login screen</h4>
 {% endif %}
-</body>
-</html>
+{% endblock %}
