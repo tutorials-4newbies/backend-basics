@@ -1,13 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>My First Server!</title>
-</head>
-<body>
-<form method="post">
-    <p><input type=text name=username>
-    <p><input type=submit value=Login>
-</form>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block content %}
+    <form method="post">
+        <p><input type=text name=username>
+        <p><input type=submit value=Login>
+    </form>
+{% endblock %}
