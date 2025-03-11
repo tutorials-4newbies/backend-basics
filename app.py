@@ -34,6 +34,18 @@ def task():
     tasks = Task.select().order_by(Task.created)
     return render_template("task.html", tasks=tasks)
 
+@app.route("/task/<task_id>/completed/", methods=["POST"])
+def mark_task_completed(task_id):
+    query = Task.update(is_completed=True).where(Task.id == task_id)
+    query.execute()
+    return redirect(url_for('task'))
+
+@app.route("/task/<task_id>/incompleted/", methods=["POST"])
+def mark_task_incompleted(task_id):
+    query = Task.update(is_completed=False).where(Task.id == task_id)
+    query.execute()
+    return redirect(url_for('task'))
+
 @app.before_request
 def before_request():
     database.connect()

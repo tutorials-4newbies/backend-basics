@@ -1,7 +1,18 @@
 {% extends 'base.html' %} {% block content %}
 <div>
   {% for task in tasks %}
-  <p>Task: {{ task.name }} || Is completed - {{ task.is_completed }}</p>
+  <p>
+    Task: {{ task.name }} || Is completed - {{ task.is_completed }} || {% if
+    task.is_completed %}
+    <form method="post" action="{{ url_for('mark_task_incompleted', task_id=task.id) }}"
+      ><input type="submit" value="Mark as Incompleted"></form
+    >
+    {% else %}
+    <form method="post" action="{{ url_for('mark_task_completed', task_id=task.id) }}"
+      ><input type="submit" value="Mark as Completed"></form
+    >
+    {% endif %}
+  </p>
   {% endfor %}
 </div>
 <div>
