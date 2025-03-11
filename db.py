@@ -1,5 +1,5 @@
 import datetime
-from peewee import SqliteDatabase, Model, CharField, DateTimeField, BooleanField
+from peewee import SqliteDatabase, Model, CharField, DateTimeField, BooleanField, ForeignKeyField
 
 # create a peewee database instance -- our models will use this database to
 # persist information
@@ -12,12 +12,19 @@ class BaseModel(Model):
     class Meta:
         database = database
 
+
+class User(BaseModel):
+    username = CharField(unique=True)
+    password = CharField()
+
+
 class Task(BaseModel):
     name = CharField()
     is_completed = BooleanField(default=False)
     created = DateTimeField(default=datetime.datetime.now)
+    user = ForeignKeyField(User, backref='tasks')
 
 
 def create_tables():
     with database:
-        database.create_tables([Task])
+        database.create_tables([Task, User])

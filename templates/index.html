@@ -1,10 +1,8 @@
-{% extends 'base.html' %}
-{% block content %}
-{% if username %}
-    <h1>Logged in as {{ username }}</h1>
-    <h4>Click <a href="/logout">here</a> to logout</h4>
+{% extends 'base.html' %} {% block content %} {% if username %}
+<h1>Logged in as {{ username }}</h1>
+<h3>Go to <a href="{{ url_for('task') }}">tasks</a></h3>
+<h4>Click <a href="{{ url_for('logout') }}">here</a> to logout</h4>
 {% else %}
-    <h1>You are not logged in</h1>
-    <h4>Click <a href="/login">here</a> for login screen</h4>
-{% endif %}
-{% endblock %}
+<h1>You are not logged in</h1>
+<h4>Click <a href="{{ url_for('login') }}">here</a> for login screen</h4>
+{% endif %} {% endblock %}

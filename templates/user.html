@@ -1,0 +1,12 @@
+{% extends "base.html" %} {% block content %}
+<h2>Create User</h2>
+<form action="{{ url_for('user') }}" method="post">
+  <dl>
+    <dt>Username:</dt>
+    <dd><input type="text" name="username" /></dd>
+    <dt>Password:</dt>
+    <dd><input type="password" name="password" /></dd>
+    <dd><input type="submit" value="Create" /></dd>
+  </dl>
+</form>
+{% endblock %}
