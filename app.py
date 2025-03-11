@@ -1,6 +1,8 @@
 from flask import Flask, redirect, render_template, request, session, url_for
 from markupsafe import escape
 
+from db import Task, create_tables, database
+
 app = Flask(__name__)
 
 # Set the secret key to some random bytes. Keep this really secret!
@@ -23,3 +25,25 @@ def logout():
     # remove the username from the session if it's there
     session.pop('username', None)
     return redirect(url_for('index')) # TEACH ABOUT REDIRECT AND URL FOR!
+
+@app.route("/task", methods=['GET', 'POST'])
+def task():
+    if request.method == 'POST':
+        Task.create(name=request.form["name"])
+        return redirect(url_for('task'))
+    tasks = Task.select().order_by(Task.created)
+    return render_template("task.html", tasks=tasks)
+
+@app.before_request
+def before_request():
+    database.connect()
+
+@app.after_request
+def after_request(response):
+    database.close()
+    return response
+
+
+if __name__ == '__main__':
+    create_tables()
+    app.run(debug=True)

@@ -1,0 +1,15 @@
+{% extends 'base.html' %} {% block content %}
+<div>
+  {% for task in tasks %}
+  <p>Task: {{ task.name }} || Is completed - {{ task.is_completed }}</p>
+  {% endfor %}
+</div>
+<div>
+  <h2>New Task Form</h2>
+  <form method="post">
+    <label for="name">Task Name</label>
+    <input type="text" name="name" /><br />
+    <input type="submit" value="Submit" />
+  </form>
+</div>
+{% endblock %}
